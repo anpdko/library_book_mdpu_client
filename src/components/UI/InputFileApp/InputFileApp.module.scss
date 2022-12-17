@@ -1,0 +1,40 @@
+
+.file{
+   min-width: 250px;
+   border: 2px solid #1C3A60;
+   border-radius: 5px;
+   position: relative;
+   transition: 0.4s;
+
+   label {
+      display: block;
+      width: 100%;
+      padding: 17px 20px 16px 45px;
+      cursor: pointer;  
+      font-size: 1rem;
+   }
+
+   i, svg{
+      position: absolute;
+      left: 10px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      color: #1C3A60;
+      z-index: -1;
+   }
+   
+   .input {
+      opacity: 0;
+      position: absolute;
+      z-index: -1;
+   }
+
+   &:hover{
+      box-shadow: 0 0 3px 1px #1C3A6088;
+      transition: 0.2s;
+   }
+}
+

@@ -1,0 +1,79 @@
+
+.home{
+   padding: 20px;
+}
+
+a{
+   text-decoration: none;
+   color: black;
+}
+
+.books{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+   gap: 35px;
+   margin-top: 40px;
+   
+   .book{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.5s;
+
+      .box_img{
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         min-height: 300px;
+         background-repeat: no-repeat;
+
+         img{
+            width: 90%;
+            border-radius: 6px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+            transition: 0.5s;
+            cursor: pointer;
+
+            &:hover{
+               transition: 0.4s ease-out;
+               transform: scale(1.05); 
+               box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.5);
+            }
+         }
+      }
+
+      .box_text{
+         min-height: 55px;
+         .title{
+            transition: 0.3s;
+            margin-block: 2px 0;
+            cursor: pointer;
+         }
+
+         .text_autor{
+            font-size: 0.9rem;
+            margin-block: 5px 0;
+            color: gray;
+            font-style: italic;
+         }
+      }
+
+      &:hover{
+         transition: 0.3s;
+         transform: scale(1.05);
+      }
+
+      &:hover .title{
+         transition: 0.3s;
+         transform: scale(1.02);
+      }
+   }
+}
+
+@media screen and (max-width: 768px){
+   .books{
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 25px;
+   };
+}

@@ -1,0 +1,49 @@
+
+
+
+.select{
+   min-width: 250px;
+   border: 2px solid #1C3A60;
+   padding: 0 0 0 12px;
+   border-radius: 5px;
+   position: relative;
+
+   
+   i, svg{
+      position: absolute;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      color: #1C3A60;
+      z-index: 2;
+   }
+
+   select {
+      width: 90%;
+      font-size: 1rem;
+      border: 0;
+      padding: 10px 12px 14px 12px;
+      margin: 0 12px;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      outline: none;
+      margin-top: 5px;
+      text-indent: 5px;
+      font-size-adjust: 0.3;
+
+      option {
+         padding: 10px;
+      }
+   }
+
+   &:focus-within{
+      box-shadow: 0 0 6px 1px #1C3A6088;
+      transform: scale(1.02);
+      z-index: 1;
+      transition: 0.2s;
+   }
+
+}

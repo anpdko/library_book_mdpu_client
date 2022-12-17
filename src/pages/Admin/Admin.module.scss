@@ -1,0 +1,60 @@
+
+
+.auth_container{
+   height: 100vh;
+   color: #1C3A60;
+
+   h1{
+      text-align: center;
+      margin-block: 20px 0;
+   }
+   .auth{
+      min-height: 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      
+      .inputs{
+         display: flex;
+         flex-direction: column;
+         align-items: flex-start;
+         justify-content: center;
+         gap: 7px;
+
+         .error{
+            color: red;
+            font-size: 0.8rem;
+         }
+      }
+   }
+}
+
+.admin{
+   display: grid;
+   grid-template-columns: 240px 1fr;
+   min-height: 100vh;
+
+   * {
+      box-sizing: border-box;
+   }
+
+   .panel{
+      margin: 20px;
+
+      .filter{
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         padding-block: 20px 50px;
+         border-bottom: 3px solid #1C3A6055;
+
+         .inputs{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+         }
+      }
+   }
+}

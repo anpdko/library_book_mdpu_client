@@ -1,0 +1,30 @@
+
+.box_input {
+   position: relative;
+
+   i, svg{
+      position: absolute;
+      height: 100%;
+      margin: 0 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      color: #1C3A60;
+      z-index: 2;
+   }
+   input{
+      font-size: 1rem;
+      padding: 15px 20px 14px 45px;
+      border: 2px solid #1C3A60;
+      outline: none;
+      border-radius: 5px;
+      transition: 0.2s;
+   }
+   input:focus{
+      box-shadow: 0 0 6px 1px #1C3A6088;
+      transform: scale(1.02);
+      z-index: 1;
+      transition: 0.2s;
+   }
+}

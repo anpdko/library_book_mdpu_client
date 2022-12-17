@@ -1,0 +1,38 @@
+
+.stars{
+   display: inline-flex;
+   align-items: center;
+   gap: 5px;
+   color: #1C3A60;
+
+   p{
+      padding-left: 10px;
+      color: black;
+   }
+
+   .star{
+      font-size: 25px;
+      cursor: pointer;
+      transition: 0.2s;
+      &:hover{
+         transform: scale(1.4);
+         transition: 0.2s;
+      }
+   }
+
+   .active ~ .star{
+      color: inherit;
+   }
+
+   .star{
+      color: #F9BF23;
+   }
+
+   &:hover .star {
+      color: #F9BF23;
+   }
+    
+   &:hover .star:hover~.star {
+      color: inherit;
+   }
+}

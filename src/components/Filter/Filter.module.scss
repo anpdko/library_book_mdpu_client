@@ -1,0 +1,38 @@
+
+.filter{
+   // border: 2px solid #1C3A60;
+   padding: 20px;
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
+
+   h2{
+      margin-block: 22px 0;
+      display: flex;
+      align-items: center;
+      svg{
+         font-size: 1.5rem;
+         color: #1C3A60;
+         margin-right: 7px;
+      }
+   }
+
+   .title{
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-transform: uppercase;
+      margin-block: 0 10px;
+      cursor: pointer;
+      svg{
+         font-size: 0.9rem;
+         color: #1C3A60CC;
+      }
+   }
+   .filter_box{
+      margin-left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+   }
+}

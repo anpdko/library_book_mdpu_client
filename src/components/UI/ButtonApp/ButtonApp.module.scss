@@ -1,0 +1,68 @@
+
+.blue{
+   background: #1C3A60;
+   border: 2px solid #1C3A60;
+   &:hover {
+      background-position: 0;
+      box-shadow: 0 0 3px 1px #1C3A6088;
+      color: #1C3A60;
+   }
+}
+
+.green{
+   background: #167a2a;
+   border: 2px solid #167a2a;
+   &:hover {
+      background-position: 0;
+      box-shadow: 0 0 3px 1px #167a2a88;
+      color: #167a2a;
+   }
+}
+
+.red{
+   background: #c25353;
+   border: 2px solid #c25353;
+   &:hover {
+      background-position: 0;
+      box-shadow: 0 0 3px 1px #c2535388;
+      color: #c25353;
+   }
+}
+
+
+.btn{
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+
+   text-decoration: none;
+   padding: 15px 30px;
+   font-size: 0.9rem;
+   font-weight: 600;
+   text-transform: uppercase;
+   color: white;
+   border-radius: 5px;
+   outline: none;
+   cursor: pointer;
+
+   transition: background 0.4s ease-in, color 0.3s;
+   background: {
+   image: linear-gradient(45deg, #F9BF23 50%, transparent 50%);
+      position: 100%;
+      size: 400%;
+   }
+}
+
+.btn.icon{
+   padding: 15px 22px;
+}
+
+.btn.transition{
+   transition: background 0.5s, color 0.3s, transform 0.3s;
+}
+
+.btn.transition:hover{
+   background:#F9BF23;
+   transform: scale(1.03);
+}
