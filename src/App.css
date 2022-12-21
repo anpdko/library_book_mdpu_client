@@ -14,6 +14,14 @@ h3{
    font-size: 1rem;
 }
 
+table img{
+   height: 80px;
+}
+
+table a{
+   color: #1C3A60;
+}
+
 .container{
    max-width: 1440px;
    margin: 0 auto;
@@ -34,4 +42,13 @@ h3{
       grid-template-columns: 1fr;
       gap: 15px;
    };
+}
+
+.loader_box{
+   min-height: calc(50vh);
+   padding-bottom: 60px;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }

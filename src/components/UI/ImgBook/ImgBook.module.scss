@@ -1,0 +1,28 @@
+
+.image{
+   img{
+      width: 100%;
+      opacity: 0;
+   }
+   .loader.anim{
+      opacity: 0.6;
+      animation-name: opacity;
+      animation-duration: 0.8s;
+      animation-iteration-count: infinite;
+   }
+   .img.anim{
+      display: none;
+   }
+   .loader.active{
+      display: none;
+   }
+   .img.active{
+      opacity: 1;
+   }
+}
+
+@keyframes opacity {
+	0%	{ opacity: 0.6; }
+	50%	{ opacity: 1 }
+	100%	{ opacity: 0.6; }
+}

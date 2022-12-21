@@ -1,19 +1,29 @@
 import React, {useState, useEffect} from 'react'
 import styles from './BookPage.module.scss'
 import { useParams } from 'react-router-dom'
-import books from '../../data/books'
 import { RatingStars } from '../../components'
-import { ButtonApp, LoaderContent } from '../../components/UI'
+import { ButtonApp, ImgBook, LoaderContent } from '../../components/UI'
 import { EyeFill, CloudArrowDownFill, StopFill } from 'react-bootstrap-icons'
 import { motion, AnimatePresence } from "framer-motion";
+import { useDispatch, useSelector } from 'react-redux';
+import { getBook } from '../../store/books/booksSlice'
+
+const imgUrl = process.env.REACT_APP_GOOGLE_DRIVE_IMG_URL 
 
 const BookPage = () => {
-   const bookId = useParams().id
    const [book, setBook] = useState([])
+   const bookId = String(useParams().id)
+   const { books } = useSelector(state => state.books)
+   const dispatch = useDispatch()
 
    useEffect(()=>{
-      setBook(books.find(item => item.id === Number(bookId)))
-   }, [bookId])
+      if(!books.length && !!bookId){
+         dispatch(getBook(bookId))
+      }
+
+      setBook(books.find(item => String(item._id) === bookId))
+   }, [bookId, books, dispatch])
+
 
    if(!book?.title) {
       return (
@@ -32,9 +42,7 @@ const BookPage = () => {
             transition={{ duration: 0.4 }}
             className={styles.book}
          >
-            <div className={styles.image}>
-               <img src={book.img} alt="book" />
-            </div>
+            <ImgBook src={imgUrl + book.imgCover} className={styles.image}/>
             <motion.div 
                className={styles.book_info}
                initial={{ x: 100 }}
@@ -54,12 +62,12 @@ const BookPage = () => {
                </div>
                <p><strong>Описание:</strong> {book.description}</p>
                <div className={styles.buttons}>
-               <a href='https://drive.google.com/uc?export=download&confirm=no_antivirus&id=18jLPOVNLRY1HnTpOPEbXvr9reGAQMK2r'>
+               <a href={`https://drive.google.com/uc?export=download&confirm=no_antivirus&id=${book.fileBook}`}>
                   <ButtonApp color="red"><CloudArrowDownFill size={20}/>
                   Скачать
                   </ButtonApp>
                </a>
-               <a href="https://drive.google.com/file/d/18jLPOVNLRY1HnTpOPEbXvr9reGAQMK2r" target="_blank" rel="noreferrer">
+               <a href={`https://drive.google.com/file/d/${book.fileBook}`} target="_blank" rel="noreferrer">
                   <ButtonApp color='blue'><EyeFill size={20}/>Посмотреть</ButtonApp>
                </a>
                </div>

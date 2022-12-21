@@ -8,6 +8,7 @@ import TextareaApp from './TextareaApp/TextareaApp'
 import Loader from "./Loader/Loader";
 import LoaderDownload from "./Loader/LoaderDownload";
 import LoaderContent from "./Loader/LoaderContent";
+import ImgBook from "./ImgBook/ImgBook";
 
 export { 
    ButtonApp, 
@@ -19,5 +20,6 @@ export {
    TextareaApp,
    Loader,
    LoaderDownload,
-   LoaderContent
+   LoaderContent,
+   ImgBook
 }

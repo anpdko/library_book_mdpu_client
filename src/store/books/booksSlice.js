@@ -11,20 +11,18 @@ const initialState = {
    message: null
 }
 
-
-export const createBook = createAsyncThunk(
-   'books/createBook',
-   async (data, thunkAPI) => {
+export const getBooks = createAsyncThunk(
+   'bokks/getBooks',
+   async ({page}, thunkAPI) => {
       try{
-         const res = await axios.post(
-            API_URL + 'api/books', 
-            data.body, 
+         const res = await axios.get(
+            `${API_URL}api/books?page=${page}`,
             {headers: authHeader()}
          )
          if(res.statusText !== 'OK'){
             throw new Error('Server error');
          }
-         thunkAPI.dispatch(addBooks(res.data))
+         thunkAPI.dispatch(setBooks({books: res.data}));
       }
       catch(error){
          if(error.response.status === 401){
@@ -37,12 +35,59 @@ export const createBook = createAsyncThunk(
 )
 
 
+export const createBook = createAsyncThunk(
+   'books/createBook',
+   async (data, thunkAPI) => {
+      try{
+         const res = await axios.post(
+            `${API_URL}api/books`, 
+            data.body, 
+            {headers: authHeader()}
+         )
+         if(res.statusText !== 'OK'){
+            throw new Error('Server error');
+         }
+         thunkAPI.dispatch(addBooks({book: res.data}))
+      }
+      catch(error){
+         if(error.response.status === 401){
+            alert(error.response.data.message)
+            thunkAPI.dispatch(adminLogout())
+         }
+         return thunkAPI.rejectWithValue(error.message)
+      }
+   }
+)
+
+export const getBook = createAsyncThunk(
+   'bokks/getBook',
+   async (bookId, thunkAPI) => {
+      try{
+         const res = await axios.get(
+            `${API_URL}api/books/${bookId}`,
+            {headers: authHeader()}
+         )
+         if(res.statusText !== 'OK'){
+            throw new Error('Server error');
+         }
+         thunkAPI.dispatch(setBooks({books: [res.data]}));
+      }
+      catch(error){
+         if(error.response.status === 401){
+            alert(error.response.data.message)
+            thunkAPI.dispatch(adminLogout())
+         }
+         return thunkAPI.rejectWithValue(error.message)
+      }
+   }
+)
+
 
 export const booksSlice = createSlice({
    name: 'books',
    initialState,
    reducers: {
-      setPosts: (state, action) => {
+      setBooks: (state, action) => {
          state.books = action.payload.books
       },
       addBooks: (state, action) => {
@@ -50,6 +95,19 @@ export const booksSlice = createSlice({
       },
    },
    extraReducers: {
+      //getBooks
+      [getBooks.pending]: (state) => {
+         state.loading = true
+         state.message = null
+      },
+      [getBooks.fulfilled]: (state) => {
+         state.loading = false
+      },
+      [getBooks.rejected]: (state, action) => {
+         state.loading = false;
+         state.message = action.payload
+      },
+
       //createBook
       [createBook.pending]: (state) => {
          state.loading = true
@@ -68,6 +126,6 @@ export const booksSlice = createSlice({
 
 
 
-export const { addBooks } = booksSlice.actions
+export const { addBooks, setBooks } = booksSlice.actions
 
 export default booksSlice.reducer

@@ -6,12 +6,19 @@ import { subText } from '../../../services/text.services'
 
 const TableItem = ({obj}) => {
 
+   const regexp = /<[^<>]+>/g;
    return (
       <tr>
          {Object.values(obj).map((item, index) => 
             Array.isArray(item)
                ?<td key={index}>{item.join(", ")}</td>
-               :<td key={index}>{subText(item, 70)}</td> 
+               :<td key={index}>
+
+                  {regexp.test(String(item))
+                     ?item
+                     :subText(item, 70)
+                  }
+               </td> 
          )}
          <td className={styles.btns}>
             <ButtonLittleApp color='blue'>

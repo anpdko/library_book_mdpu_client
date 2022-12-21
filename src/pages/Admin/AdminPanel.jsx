@@ -1,25 +1,52 @@
 import React, {useState, useEffect} from 'react'
 import styles from './Admin.module.scss'
-import { ButtonApp, InputApp } from '../../components/UI'
+import { ButtonApp, InputApp, Loader } from '../../components/UI'
 import { Dashboard } from '../../components'
 import { PlusCircleFill, Search } from 'react-bootstrap-icons'
 import dashboard from '../../data/dashboard'
-import books from '../../data/books'
 import { TableList, CreateBook } from '../../components'
 import { motion, AnimatePresence } from 'framer-motion'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { getBooks } from '../../store/books/booksSlice'
+
+
+const imgUrl = process.env.REACT_APP_GOOGLE_DRIVE_IMG_URL 
+
 const AdminPanel = () => {
-   const [isCreateBox, setIsCreateBox] = useState(false)
+   const [isVisibleBox, setIsVisibleBox] = useState(false)
    const [listDashboard, setListDashboard] = useState([])
-   const [listBooks, setListBooks] = useState([])
+
+   const dispatch = useDispatch()
+   const {books, loading} = useSelector((state) => state.books)
 
    useEffect(()=>{
+      dispatch(getBooks())
       setListDashboard(dashboard)
-   }, [])
+   },[dispatch])
 
-   useEffect(()=>{
-      setListBooks(books)
-   },[])
+   const changeDataBooks = (list) => {
+      list = list.map((book) => {
+         const { _id, __v, comments, ...newBook} = book
+         return {
+            ...newBook,
+            imgCover: <img 
+               src={imgUrl + book.imgCover}
+               alt="imgCover"
+            />,
+            fileBook: <a 
+               href={imgUrl + book.fileBook}
+               target="_blank" rel="noreferrer"
+            >посилання на файл</a>
+         }
+      })
+      
+      return list
+   }
+
+   if(loading) {
+      return <Loader/>
+   }
    
    return (
       <AnimatePresence>
@@ -47,7 +74,7 @@ const AdminPanel = () => {
                      <ButtonApp>Пошук</ButtonApp>
                   </div>
                   <div className={styles.buts}>
-                     <ButtonApp color='green' onClick={()=>setIsCreateBox(!isCreateBox)}>
+                     <ButtonApp color='green' onClick={()=>setIsVisibleBox(!isVisibleBox)}>
                         <PlusCircleFill/>
                         Додати Книгу
                      </ButtonApp>
@@ -60,10 +87,12 @@ const AdminPanel = () => {
                exit={{ y: 20, opacity: 0 }}
                transition={{ duration: 0.3 }}
             >
-               <TableList list={listBooks}/>
+               <TableList 
+                  list={changeDataBooks(books)}
+               />
             </motion.div>
          </div>
-         {isCreateBox && <CreateBook setBox={setIsCreateBox}/>}
+         {isVisibleBox && <CreateBook setBox={setIsVisibleBox}/>}
       </div>
       </AnimatePresence>
    );

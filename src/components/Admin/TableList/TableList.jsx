@@ -4,7 +4,7 @@ import TableItem from '../TableItem/TableItem';
 import { Pagination } from '../../'
 
 const TableList = ({list}) => {
-
+   
    return (
       <div className={styles.table}>
          <table>
@@ -20,8 +20,8 @@ const TableList = ({list}) => {
             </thead>
             <tbody>
                {!!list.length && 
-                  list.map(obj => 
-                     <TableItem key={obj.id} obj={obj}/>  
+                  list.map((obj, index) => 
+                     <TableItem key={index} obj={obj}/>  
                   )
                }
             </tbody>

@@ -1,6 +1,6 @@
 
 .loader_box{
-   min-height: calc(100vh - 480px);
+   min-height: calc(100vh);
    padding-bottom: 60px;
    width: 100%;
    display: flex;
@@ -16,7 +16,9 @@
    gap: 60px;
    .image{
       img{
-         width: 100%;
+         border-radius: 10px;
+      }
+      .loader_img{
          border-radius: 10px;
       }
    }
