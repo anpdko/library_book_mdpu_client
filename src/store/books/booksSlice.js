@@ -15,11 +15,9 @@ export const getBooks = createAsyncThunk(
    'bokks/getBooks',
    async ({page}, thunkAPI) => {
       try{
-         const res = await axios.get(
-            `${API_URL}api/books?page=${page}`,
-            {headers: authHeader()}
-         )
-         if(res.statusText !== 'OK'){
+         const res = await axios.get(`${API_URL}api/books?page=${page}`)
+         if(res.status !== 200){
+            console.log('Server error')
             throw new Error('Server error');
          }
          thunkAPI.dispatch(setBooks({books: res.data}));
@@ -44,7 +42,8 @@ export const createBook = createAsyncThunk(
             data.body, 
             {headers: authHeader()}
          )
-         if(res.statusText !== 'OK'){
+         if(res.status !== 200){
+            console.log('Server error')
             throw new Error('Server error');
          }
          thunkAPI.dispatch(addBooks({book: res.data}))
@@ -67,7 +66,8 @@ export const getBook = createAsyncThunk(
             `${API_URL}api/books/${bookId}`,
             {headers: authHeader()}
          )
-         if(res.statusText !== 'OK'){
+         if(res.status !== 200){
+            console.log('Server error')
             throw new Error('Server error');
          }
          thunkAPI.dispatch(setBooks({books: [res.data]}));

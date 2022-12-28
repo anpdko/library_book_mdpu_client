@@ -13,10 +13,9 @@ const Home = () => {
 
    useEffect(()=>{
       dispatch(getBooks(1))
-      // dispatch(getBooks(1))
    }, [dispatch])
 
-   return (
+   return ( 
       <AnimatePresence>
          <section className='main'>
             <motion.div 
