@@ -4,7 +4,6 @@ import RouterAdmin from './router/RouterAdmin';
 import RouterApp from './router/RouterApp'
 import { Footer, Navbar } from './components';
 import { Routes, Route } from 'react-router-dom'
-import TestUpload from './pages/TestUpload/TestUpload';
 
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
             <Footer/>
           </React.Fragment>
         }/>
-        <Route path='file' element={<TestUpload/>}/>
         <Route path='admin/*' element={<RouterAdmin/>}/>
       </Routes>
     </React.Fragment>

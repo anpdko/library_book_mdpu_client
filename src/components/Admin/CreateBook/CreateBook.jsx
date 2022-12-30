@@ -8,31 +8,58 @@ import { ButtonApp, InputApp, InputFileApp, SelectApp, TextareaApp } from '../..
 import { motion } from 'framer-motion'
 import { useDispatch } from 'react-redux'
 import { createBook } from '../../../store/books/booksSlice';
+import { LoaderDownload } from '../../UI'
+
+import { uploadImg, uploadFile } from '../../../services/upload.service'
 
 const CreateBook = ({setBox}) => {
    const [newBook, setNewBook] = useState({})
+   const [loader, setLoader] = useState(false)
    const dispatch = useDispatch()
 
    //change
-   const changeBook = (e) => {
+   const changeTextBook = (e) => {
       setNewBook({...newBook, [e.target.name]: e.target.value})
    }
+
    const changeArrBook = (e) => {
       let arr = e.target.value.split(',')
       arr = arr.map(item => item.trim())
 
       setNewBook({...newBook, [e.target.name]: arr})
    }
-   const changeFileBook = (e) => {
-      console.log(e.target.name)
-      setNewBook({...newBook, [e.target.name]: e.target.files[0]})
+
+   const changeAndUploadCover = (e) => {
+      setLoader(true)
+      uploadImg(e.target.files[0], e.target.name)
+      .then(res => {
+         console.log(res.data.fileId)
+         setNewBook({...newBook, [e.target.name]: res.data.fileId})
+         setLoader(false)
+      })
+      .catch(err => {
+         console.log(err)
+      })
+   }
+   const changeAndUploadFile = (e) => {
+      setLoader(true)
+      uploadFile(e.target.files[0], e.target.name)
+      .then(res => {
+         console.log(res.data.fileId)
+         setNewBook({...newBook, [e.target.name]: res.data.fileId})
+         setLoader(false)
+      })
+      .catch(err => {
+         console.log(err)
+      })
    }
 
    // get data server
    const getNewBook = () => {
-      if(!!newBook?.fileBook) {
+      if(!!newBook?.fileBook && !!newBook?.imgCover) {
          console.log(newBook)
          dispatch(createBook({body: newBook}))
+         setBox(false)
       }
       else{
          alert("Додайте PDF файл!")
@@ -41,6 +68,7 @@ const CreateBook = ({setBox}) => {
 
    return (
          <div className={styles.box_create} onClick={()=>setBox(false)}>
+            {loader && <LoaderDownload/>}
             <motion.div 
                className={styles.create} 
                onClick={(e)=>e.stopPropagation()}
@@ -57,20 +85,20 @@ const CreateBook = ({setBox}) => {
                <div className={styles.inps}>
                   <InputApp 
                      name = 'title'
-                     onChange = {changeBook}
+                     onChange = {changeTextBook}
                      placeholder = 'Назва'
                   >
                      <Book/>
                   </InputApp>
                   <TextareaApp 
                      name = 'description'
-                     onChange = {changeBook}
+                     onChange = {changeTextBook}
                      placeholder='Опис книги' 
                      className={styles.textarea}
                   />
                   <InputApp 
                      name = 'author'
-                     onChange = {changeBook}
+                     onChange = {changeTextBook}
                      placeholder = 'Автор'
                   >
                      <Person/>
@@ -91,7 +119,7 @@ const CreateBook = ({setBox}) => {
                   </InputApp>
                   <InputApp 
                      name = 'publisher'
-                     onChange = {changeBook}
+                     onChange = {changeTextBook}
                      placeholder = 'Видавець'
                   >
                      <PrinterFill/>
@@ -99,7 +127,7 @@ const CreateBook = ({setBox}) => {
                   <InputApp 
                      name = 'year'
                      type="number" 
-                     onChange = {changeBook}
+                     onChange = {changeTextBook}
                      placeholder = 'Рік'
                   >
                      <CalendarDate/>
@@ -107,21 +135,21 @@ const CreateBook = ({setBox}) => {
                   <InputApp 
                      name = 'pageCount'
                      type="number" 
-                     onChange = {changeBook}
+                     onChange = {changeTextBook}
                      placeholder = 'Кількість сторінок'
                   >
                      <Hash/>
                   </InputApp>
                   <SelectApp
                      name = 'language'
-                     onChange = {changeBook}
+                     onChange = {changeTextBook}
                      list={['українська', 'англійська', 'російська']}
                   >
                      <GlobeAmericas/>
                   </SelectApp>
                   <InputFileApp 
                      name="imgCover"
-                     onChange={changeFileBook} 
+                     onChange={changeAndUploadCover} 
                      accept="image/png, image/jpeg"
                      placeholder = 'Виберіть обкладенку'>
                      <Image/>
@@ -129,14 +157,14 @@ const CreateBook = ({setBox}) => {
                   <InputFileApp 
                      name="fileBook"
                      accept="application/pdf"
-                     onChange={changeFileBook}
+                     onChange={changeAndUploadFile}
                      placeholder = 'Виберіть книгу в PDF'
                   >
                      <CloudArrowUpFill/>
                   </InputFileApp>
                </div>
                <ButtonApp onClick = {getNewBook}>
-                  Додати
+                  Додати книгу до бібліотеки
                </ButtonApp>
             </motion.div>
          </div>

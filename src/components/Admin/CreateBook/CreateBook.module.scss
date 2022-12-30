@@ -12,14 +12,14 @@
 
    .create{
       background: white;
-      min-width: 620px;
+      min-width: 850px;
       padding: 18px 18px 35px 18px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       gap: 10px;
-      border-radius: 10px;
+      border-radius: 6px;
       border: 3px solid #1C3A60DD;
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
 
@@ -36,7 +36,12 @@
          .close{
             color: #1C3A60;
             font-size: 2.4rem;
+            transition: all 0.2s;
             cursor: pointer;
+            &:hover{
+               transform: scale(1.1);
+               transition: all 0.3s;
+            }
          }
       }
 
@@ -46,8 +51,12 @@
          display: grid;
          align-items: center;
          justify-items: center;
-         grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+         grid-template-columns: repeat(auto-fit, minmax(375px, 1fr));
          gap: 5px;
+
+         & > *, input{
+            min-width: 375px;
+         }
 
          
          .textarea{
