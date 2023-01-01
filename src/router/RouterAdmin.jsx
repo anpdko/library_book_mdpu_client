@@ -19,9 +19,9 @@ const RouterAdmin = () => {
       <React.Fragment>
          {isLoggedIn
             ?<Routes>
-               <Route path='/' element={<AdminPanel/>}/>
+               <Route path='/panel/*' element={<AdminPanel/>}/>
                <Route path="/error" element={<Eror404/>}/>
-               <Route path="*" element={<Navigate to={'/admin'}/>} />
+               <Route path="*" element={<Navigate to={'/admin/panel'}/>} />
             </Routes>
             :<Routes>
                <Route path='/auth' element={<AdminAuth/>}/>

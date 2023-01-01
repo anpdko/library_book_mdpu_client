@@ -58,6 +58,55 @@ export const createBook = createAsyncThunk(
    }
 )
 
+export const putBook = createAsyncThunk(
+   'books/putBook',
+   async (data, thunkAPI) => {
+      try{
+         const res = await axios.put(
+            `${API_URL}api/books/${data.id}`, 
+            data.body, 
+            {headers: authHeader()}
+         )
+         if(res.status !== 200){
+            console.log('Server error')
+            throw new Error('Server error');
+         }
+         thunkAPI.dispatch(changeBook({book: data.body}))
+      }
+      catch(error){
+         if(error.response.status === 401){
+            alert(error.response.data.message)
+            thunkAPI.dispatch(adminLogout())
+         }
+         return thunkAPI.rejectWithValue(error.message)
+      }
+   }
+)
+
+export const deleteBook = createAsyncThunk(
+   'books/deleteBook',
+   async (data, thunkAPI) => {
+      try{
+         const res = await axios.delete(
+            `${API_URL}api/books/${data.id}`,
+            {headers: authHeader()}
+         )
+         if(res.status !== 200){
+            console.log('Server error')
+            throw new Error('Server error');
+         }
+         thunkAPI.dispatch(removeBook({id: data.id}))
+      }
+      catch(error){
+         if(error.response.status === 401){
+            alert(error.response.data.message)
+            thunkAPI.dispatch(adminLogout())
+         }
+         return thunkAPI.rejectWithValue(error.message)
+      }
+   }
+)
+
 export const getBook = createAsyncThunk(
    'bokks/getBook',
    async (bookId, thunkAPI) => {
@@ -82,13 +131,26 @@ export const getBook = createAsyncThunk(
    }
 )
 
-
 export const booksSlice = createSlice({
    name: 'books',
    initialState,
    reducers: {
       setBooks: (state, action) => {
          state.books = action.payload.books
+      },
+      changeBook: (state, action) =>{
+         state.books = state.books.map(book => {
+            if(action.payload.book._id === book._id){
+               return action.payload.book
+            }
+            return book
+         })
+      },
+      removeBook: (state, action) => {
+         state.books = state.books.filter(book =>{
+            return book._id !== action.payload.id
+         })
+
       },
       addBooks: (state, action) => {
          state.books = [...state.books, ...action.payload.book]
@@ -126,6 +188,6 @@ export const booksSlice = createSlice({
 
 
 
-export const { addBooks, setBooks } = booksSlice.actions
+export const { addBooks, setBooks, changeBook, removeBook } = booksSlice.actions
 
 export default booksSlice.reducer

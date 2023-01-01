@@ -4,30 +4,32 @@ import { ButtonApp, InputApp, Loader } from '../../components/UI'
 import { Dashboard } from '../../components'
 import { PlusCircleFill, Search } from 'react-bootstrap-icons'
 import dashboard from '../../data/dashboard'
-import { TableList, CreateBook } from '../../components'
+import { TableList } from '../../components'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { getBooks } from '../../store/books/booksSlice'
+import RouterBoxInputs from '../../router/RouterBoxInputs'
+import { useNavigate } from 'react-router-dom'
 
 
 const imgUrl = process.env.REACT_APP_GOOGLE_DRIVE_IMG_URL 
 
 const AdminPanel = () => {
-   const [isVisibleBox, setIsVisibleBox] = useState(false)
    const [listDashboard, setListDashboard] = useState([])
-
    const dispatch = useDispatch()
    const {books, loading} = useSelector((state) => state.books)
+   const navigate = useNavigate()
 
    useEffect(()=>{
-      dispatch(getBooks())
+      dispatch(getBooks(1))
       setListDashboard(dashboard)
    },[dispatch])
 
+
    const changeDataBooks = (list) => {
-      list = list.map((book) => {
-         const { _id, __v, comments, ...newBook} = book
+      return list.map((book) => {
+         const {__v, comments, ...newBook} = book
          return {
             ...newBook,
             imgCover: <img 
@@ -40,8 +42,6 @@ const AdminPanel = () => {
             >посилання на файл</a>
          }
       })
-      
-      return list
    }
 
    if(loading) {
@@ -74,7 +74,7 @@ const AdminPanel = () => {
                      <ButtonApp>Пошук</ButtonApp>
                   </div>
                   <div className={styles.buts}>
-                     <ButtonApp color='green' onClick={()=>setIsVisibleBox(!isVisibleBox)}>
+                     <ButtonApp color='green' onClick={()=>navigate('create')}>
                         <PlusCircleFill/>
                         Додати Книгу
                      </ButtonApp>
@@ -92,7 +92,8 @@ const AdminPanel = () => {
                />
             </motion.div>
          </div>
-         {isVisibleBox && <CreateBook setBox={setIsVisibleBox}/>}
+
+         <RouterBoxInputs/>
       </div>
       </AnimatePresence>
    );

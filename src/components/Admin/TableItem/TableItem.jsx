@@ -3,9 +3,12 @@ import styles from './TableItem.module.scss'
 import { ButtonLittleApp } from '../../UI'
 import { TrashFill, PencilFill } from 'react-bootstrap-icons'
 import { subText } from '../../../services/text.services'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { deleteBook } from '../../../store/books/booksSlice'
 
-const TableItem = ({obj}) => {
-
+const TableItem = ({id, obj}) => {
+   const dispatch = useDispatch()
    const regexp = /<[^<>]+>/g;
    return (
       <tr>
@@ -21,10 +24,14 @@ const TableItem = ({obj}) => {
                </td> 
          )}
          <td className={styles.btns}>
-            <ButtonLittleApp color='blue'>
-               <PencilFill/>
-            </ButtonLittleApp>
-            <ButtonLittleApp color='red'>
+            <Link to={`edit/${id}`}>
+               <ButtonLittleApp color='blue'>
+                  <PencilFill/>
+               </ButtonLittleApp>
+            </Link>
+            <ButtonLittleApp color='red' onClick={
+               () => dispatch(deleteBook({id}))
+            }>
                <TrashFill/>
             </ButtonLittleApp>
          </td>

@@ -4,7 +4,7 @@ import {CaretRightFill, CaretDownFill} from 'react-bootstrap-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const WrapperFilter = ({title="тип", children}) => {
-   const [visibility, serVisibility] = useState(true)
+   const [visibility, serVisibility] = useState(false)
 
    return(
       <div className={styles.wrapper_filter}>

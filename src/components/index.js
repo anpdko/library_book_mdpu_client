@@ -5,6 +5,7 @@ import Pagination from "./Pagination/Pagination";
 import Dashboard from './Admin/Dashboard/Dashboard'
 import TableList from "./Admin/TableList/TableList";
 import CreateBook from "./Admin/CreateBook/CreateBook";
+import EditBook from "./Admin/EditBook/EditBook";
 import Footer from "./Footer/Footer";
 
 export { 
@@ -15,5 +16,6 @@ export {
    Dashboard,
    TableList,
    CreateBook,
+   EditBook,
    Footer
 }
