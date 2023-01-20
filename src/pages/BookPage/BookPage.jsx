@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import styles from './BookPage.module.scss'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { RatingStars } from '../../components'
 import { ButtonApp, ImgBook, LoaderContent } from '../../components/UI'
 import { EyeFill, CloudArrowDownFill, StopFill } from 'react-bootstrap-icons'
@@ -51,6 +51,11 @@ const BookPage = () => {
                transition={{ duration: 0.4}}
             >
                <h1>{book.title}</h1>
+               <ul className={styles.breadcrumb}>
+                  <li><Link to="/">Главная</Link></li>
+                  <li>/</li>
+                  <li className={styles.last}>Книга</li>
+               </ul>
                <RatingStars rating={book.rating}/>
                <div className={styles.box_second}>
                   <p><StopFill/><strong>Автор:</strong> {book.author}</p>

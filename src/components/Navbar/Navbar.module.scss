@@ -179,12 +179,11 @@ header{
    z-index: 2;
 
    span{
-
       width: 40px;
       height: 2px;
       position: absolute;
       background: white;
-      transition: all 1s;
+      transition: all 0.4s;
    }
    span:nth-of-type(2) {
       top: calc(50% - 12px);
@@ -238,7 +237,7 @@ header{
             width: 100%;
             overflow: hidden;
             order: 2;
-            transition: all 1s ease-out;
+            transition: all 0.6s;
             ul{
                flex-direction: column;
                align-items: center;
