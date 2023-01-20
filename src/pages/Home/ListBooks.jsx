@@ -27,7 +27,7 @@ const ListBooks = ({books}) => {
                </div>
                <div className={styles.box_text}>
                   <Link to={`book/${book.id}`}>
-                     <h3 className={styles.title}>{subText(book.title, 40)}</h3>
+                     <h3 className={styles.title}>{subText(book.title, 32)}</h3>
                   </Link>
                   <p className={styles.text_autor}>{subText(book.author, 20)}</p>
                </div>
