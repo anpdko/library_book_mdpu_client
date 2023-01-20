@@ -1,25 +1,47 @@
 
-.image{
-   img{
-      width: 100%;
-      opacity: 0;
-   }
-   .loader.anim{
-      opacity: 0.6;
-      animation-name: opacity;
-      animation-duration: 0.8s;
-      animation-iteration-count: infinite;
-   }
-   .img.anim{
-      display: none;
-   }
-   .loader.active{
-      display: none;
-   }
-   .img.active{
-      opacity: 1;
+.box_image{
+   // display: flex;
+   // align-items: center;
+   // justify-content: center;
+
+   .image{
+      position: relative;
+      .box_effect{
+         top: 0;
+         bottom: 5px;
+         left: 0;
+         right: 0;
+         position: absolute;
+         box-shadow:
+         inset rgba(0,0,0,.5) 0 -2px 6px,
+         inset rgba(252,255,255,.7) 0 2px 6px,
+         rgba(0,0,0,.35) 3px 2px 3px -2px;
+         border-radius: 3px;
+      }
+   
+      img{
+         width: 100%;
+         border-radius: 3px;
+         opacity: 0;
+      }
+      .loader.anim{
+         opacity: 0.6;
+         animation-name: opacity;
+         animation-duration: 0.8s;
+         animation-iteration-count: infinite;
+      }
+      .img.anim{
+         display: none;
+      }
+      .loader.active{
+         display: none;
+      }
+      .img.active{
+         opacity: 1;
+      }
    }
 }
+
 
 @keyframes opacity {
 	0%	{ opacity: 0.6; }

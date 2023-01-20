@@ -9,11 +9,15 @@ import ListBooks from './ListBooks'
 
 const Home = () => {
    const dispatch = useDispatch()
-   const {books, loading} = useSelector((state) => state.books)
+   const {books, totalPages, loading} = useSelector((state) => state.books)
 
    useEffect(()=>{
-      dispatch(getBooks(1))
+      dispatch(getBooks({page: 1}))
    }, [dispatch])
+
+   const getPagination = (page) => {
+      dispatch(getBooks({page}))
+   }
 
    return ( 
       <AnimatePresence>
@@ -29,13 +33,13 @@ const Home = () => {
             
             <div className={styles.home}>
                {/* <h1>Каталог книг</h1> */}
-               {loading || books.length < 2
+               {loading || books.length < 0
                   ?<div className='loader_box'>
                      <LoaderContent/>
                   </div>
                   :<ListBooks books={books}/>   
                }   
-               <Pagination/>
+               <Pagination pagination={getPagination} totalPages={totalPages}/>
             </div>
          </section>
       </AnimatePresence>

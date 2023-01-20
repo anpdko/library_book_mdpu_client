@@ -10,6 +10,7 @@ import { deleteBook } from '../../../store/books/booksSlice'
 const TableItem = ({id, obj}) => {
    const dispatch = useDispatch()
    const regexp = /<[^<>]+>/g;
+   
    return (
       <tr>
          {Object.values(obj).map((item, index) => 

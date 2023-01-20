@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Navbar.module.scss'
 import coverImg from '../../assets/images/cover.jpg'
 import back_coverImg from '../../assets/images/back_cover.png'
@@ -10,6 +10,7 @@ import { useMousePosition } from '../../hooks'
 
 const Navbar = ({title}) => {
    const position = useMousePosition();
+   const [toggle, setToggle] = useState(false)
 
    const backAnimate = () => {
       return { 
@@ -31,15 +32,26 @@ const Navbar = ({title}) => {
          <header id="up">
             <div className='container'>
                <nav className={styles.nav}>
-                  <ul>
-                     <li><Link className={styles.link_button} to="/">Головна</Link></li>
-                     <li><Link className={styles.link_button} to="/">Про бібліотеку</Link></li>
-                     <li><a className={styles.link_button} href="https://mdpu.org.ua/">На сайт МДПУ</a></li>
-                     <li><Link className={styles.link_button} to="/admin">Адмін панель</Link></li>
-                  </ul>
+                  <div className={`${styles.menu} ${toggle?styles.active:''}`}>
+                     <ul>
+                        <li><Link className={styles.link_button} to="/">Головна</Link></li>
+                        <li><Link className={styles.link_button} to="/">Про бібліотеку</Link></li>
+                        <li><a className={styles.link_button} href="https://mdpu.org.ua/">На сайт МДПУ</a></li>
+                        <li><Link className={styles.link_button} to="/admin">Адмін панель</Link></li>
+                     </ul>
+                  </div>
+                  <label 
+                     onClick={() => setToggle(!toggle)} 
+                     className={`${styles.menu_btn} ${toggle?styles.active:''}`} 
+                     htmlFor="toggler"
+                  >
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                  </label>
                   <div className={styles.box_input}>
-                     <input type="text" id="search-text"/>
-                     <label htmlFor="search-text" className={styles.box}>
+                     <input type="text" id="search_text"/>
+                     <label htmlFor="search_text" className={styles.box}>
                         <Search className={styles.search_icon}/>
                      </label>
                   </div>

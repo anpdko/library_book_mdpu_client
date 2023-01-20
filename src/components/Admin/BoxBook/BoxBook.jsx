@@ -38,6 +38,7 @@ const BoxBook = ({settings, newBook, setNewBook, getNewBook}) => {
       })
       .catch(err => {
          console.log(err)
+         setLoader(false)
       })
    }
 
@@ -51,6 +52,7 @@ const BoxBook = ({settings, newBook, setNewBook, getNewBook}) => {
       })
       .catch(err => {
          console.log(err)
+         setLoader(false)
       })
    }
 

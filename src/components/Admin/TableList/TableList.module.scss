@@ -1,22 +1,24 @@
 
 .table{
    padding-block: 30px;
-
-   table{
+   
+   .table_scroll{
+      box-sizing: border-box;
       width: 100%;
-   }
-
-   tr:nth-of-type(even) {
-      background: #1C3A6022;
-   }
-
-   th, td{
-      padding: 5px 10px;
-      font-size: 0.8rem;
-      text-align: center;
-   }
-
-   th{
-      text-transform: uppercase;
+      overflow-x: auto;
+   
+      tr:nth-of-type(even) {
+         background: #1C3A6022;
+      }
+   
+      th, td{
+         padding: 5px 10px;
+         font-size: 0.8rem;
+         text-align: center;
+      }
+   
+      th{
+         text-transform: uppercase;
+      }
    }
 }

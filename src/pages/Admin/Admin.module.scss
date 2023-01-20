@@ -33,7 +33,7 @@
 
 .admin{
    display: grid;
-   grid-template-columns: 220px 1fr;
+   grid-template-columns: 220px calc(100vw - 220px);
    min-height: 100vh;
 
    * {

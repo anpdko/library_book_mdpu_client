@@ -9,6 +9,7 @@ import { ImgBook } from '../../components/UI'
 const imgUrl = process.env.REACT_APP_GOOGLE_DRIVE_IMG_URL 
 
 const ListBooks = ({books}) => {
+
    return (
       <motion.div 
          className={styles.books}
@@ -21,7 +22,7 @@ const ListBooks = ({books}) => {
             <div key={book._id} className={styles.book}>
                <div className={styles.box_img}>
                   <Link to={`book/${book._id}`}>
-                     <ImgBook src={imgUrl + book.imgCover} alt="cover"/>
+                     <ImgBook src={imgUrl + book.imgCover} className={styles.image} alt="cover"/>
                   </Link>
                </div>
                <div className={styles.box_text}>
@@ -32,6 +33,10 @@ const ListBooks = ({books}) => {
                </div>
             </div>
          )}
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
       </motion.div>
    );
 };

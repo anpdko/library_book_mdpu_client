@@ -7,6 +7,7 @@ const API_URL = process.env.REACT_APP_API_URL
 
 const initialState = {
    books: [],
+   totalPages: 0,
    loading: null,
    message: null
 }
@@ -20,7 +21,10 @@ export const getBooks = createAsyncThunk(
             console.log('Server error')
             throw new Error('Server error');
          }
-         thunkAPI.dispatch(setBooks({books: res.data}));
+         thunkAPI.dispatch(setBooks({
+            books: res.data.books, 
+            totalPages:res.data.totalPages
+         }));
       }
       catch(error){
          if(error.response.status === 401){
@@ -137,6 +141,7 @@ export const booksSlice = createSlice({
    reducers: {
       setBooks: (state, action) => {
          state.books = action.payload.books
+         state.totalPages = action.payload.totalPages
       },
       changeBook: (state, action) =>{
          state.books = state.books.map(book => {

@@ -25,7 +25,12 @@ const uploadImg = async (img, name, size=860) => {
          return res;
       }catch(err) {
          console.log(err)
-         alert("Ошибка загрузки картинки на сервер, попробуйте позже!")
+         if(err?.response?.status === 401){
+            alert("Пользователь, не авторизован. Повторите вход.")
+         }
+         else{
+            alert("Ошибка загрузки картинки на сервер, попробуйте позже!")
+         }
       }
     }
 }

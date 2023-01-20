@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getBooks } from '../../store/books/booksSlice'
 import RouterBoxInputs from '../../router/RouterBoxInputs'
 import { useNavigate } from 'react-router-dom'
+import { Pagination } from '../../components'
 
 
 const imgUrl = process.env.REACT_APP_GOOGLE_DRIVE_IMG_URL 
@@ -18,13 +19,17 @@ const imgUrl = process.env.REACT_APP_GOOGLE_DRIVE_IMG_URL
 const AdminPanel = () => {
    const [listDashboard, setListDashboard] = useState([])
    const dispatch = useDispatch()
-   const {books, loading} = useSelector((state) => state.books)
+   const {books, totalPages, loading} = useSelector((state) => state.books)
    const navigate = useNavigate()
 
    useEffect(()=>{
       dispatch(getBooks(1))
       setListDashboard(dashboard)
    },[dispatch])
+
+   const getPagination = (page) => {
+      dispatch(getBooks({page}))
+   }
 
 
    const changeDataBooks = (list) => {
@@ -42,10 +47,6 @@ const AdminPanel = () => {
             >посилання на файл</a>
          }
       })
-   }
-
-   if(loading) {
-      return <Loader/>
    }
    
    return (
@@ -87,9 +88,17 @@ const AdminPanel = () => {
                exit={{ y: 20, opacity: 0 }}
                transition={{ duration: 0.3 }}
             >
-               <TableList 
-                  list={changeDataBooks(books)}
-               />
+               <div>      
+                  {loading?<Loader/>:''}
+                  <TableList 
+                     list={changeDataBooks(books)}
+                  />
+                  <Pagination 
+                     pagination={getPagination} 
+                     totalPages={totalPages}
+                  />
+               </div>
+
             </motion.div>
          </div>
 

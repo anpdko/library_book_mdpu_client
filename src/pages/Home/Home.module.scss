@@ -28,26 +28,36 @@ a{
          min-height: 300px;
          background-repeat: no-repeat;
 
-         img{
-            width: 100%;
-            border-radius: 6px;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+         .image{
             transition: 0.5s;
-            cursor: pointer;
+            img{
+               width: 100%;
+               transition: 0.5s;
+               cursor: pointer;
+            }
+            div{
+               transition: 0.5s;
+            }
 
-            &:hover{
-               transition: 0.4s ease-out;
-               transform: scale(1.05); 
-               box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.5);
+            &:hover img{
+               transition: 0.3s ease-out;
+               transform: scale(1.02); 
+               box-shadow: 5px 3px 8px rgba(0, 0, 0, 0.3);
+            }
+            &:hover div{
+               transition: 0.3s ease-out;
+               transform: scale(1.02); 
             }
          }
       }
 
       .box_text{
          min-height: 55px;
+         text-align: center;
+         
          .title{
             transition: 0.3s;
-            margin-block: 2px 0;
+            margin-block: 4px 2px;
             cursor: pointer;
          }
 
@@ -72,6 +82,9 @@ a{
 }
 
 @media screen and (max-width: 768px){
+   .home{
+      padding: 20px 10px;
+   }
    .books{
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 25px;
