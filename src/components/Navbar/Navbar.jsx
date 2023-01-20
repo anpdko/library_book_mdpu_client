@@ -27,6 +27,10 @@ const Navbar = ({title}) => {
       }
    }
 
+   const changeToggle = () => {
+      setToggle(!toggle)
+   }
+
    return (
       <AnimatePresence>
          <header id="up">
@@ -34,14 +38,14 @@ const Navbar = ({title}) => {
                <nav className={styles.nav}>
                   <div className={`${styles.menu} ${toggle?styles.active:''}`}>
                      <ul>
-                        <li><Link className={styles.link_button} to="/">Головна</Link></li>
-                        <li><Link className={styles.link_button} to="/">Про бібліотеку</Link></li>
-                        <li><a className={styles.link_button} href="https://mdpu.org.ua/">На сайт МДПУ</a></li>
-                        <li><Link className={styles.link_button} to="/admin">Адмін панель</Link></li>
+                        <li onClick={changeToggle} ><Link className={styles.link_button} to="/">Головна</Link></li>
+                        <li onClick={changeToggle} ><Link className={styles.link_button} to="/">Про бібліотеку</Link></li>
+                        <li onClick={changeToggle} ><a className={styles.link_button} href="https://mdpu.org.ua/">На сайт МДПУ</a></li>
+                        <li onClick={changeToggle} ><Link className={styles.link_button} to="/admin">Адмін панель</Link></li>
                      </ul>
                   </div>
                   <label 
-                     onClick={() => setToggle(!toggle)} 
+                     onClick={changeToggle} 
                      className={`${styles.menu_btn} ${toggle?styles.active:''}`} 
                      htmlFor="toggler"
                   >

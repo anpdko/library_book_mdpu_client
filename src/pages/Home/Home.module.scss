@@ -12,7 +12,7 @@ a{
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
    gap: 35px;
-   margin-top: 40px;
+   margin-top: 20px;
    
    .book{
       display: flex;
@@ -83,10 +83,22 @@ a{
 
 @media screen and (max-width: 768px){
    .home{
-      padding: 20px 10px;
+      padding: 15px 5px;
    }
    .books{
+      margin-top: 0px;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 25px;
+      gap: 20px;
    };
+}
+
+
+
+@media screen and (max-width: 480px){
+   .home{
+      padding: 0px;
+   }
+   .books{
+      gap: 15px;
+   }
 }

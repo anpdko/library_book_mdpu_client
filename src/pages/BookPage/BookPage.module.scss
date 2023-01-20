@@ -43,6 +43,7 @@
       }
       p{
          margin: 0;
+         text-align: justify;
       }
 
       .buttons{
@@ -57,5 +58,53 @@
    .book{
       grid-template-columns: 280px 3fr;
       gap: 40px;
+   }
+}
+
+
+@media screen and (max-width: 768px){
+   .book{
+      margin: 30px 0;
+      grid-template-columns: 1fr;
+      gap: 0px;
+      .image{
+         max-width: 400px;
+         margin: 0 auto;
+      }
+      .book_info{
+         margin: 0 20px;
+         h1{
+            margin: 20px 0 0 0;
+         }
+         .buttons{
+            width: 100%;
+            justify-content: center;
+         }
+      }
+   }
+}
+
+@media screen and (max-width: 480px){
+   .book{
+      grid-template-columns: 1fr;
+      gap: 40px;
+      .image{
+         max-width: auto;
+         margin: 0 30px;
+      }
+      .book_info{
+         margin: 0 10px;
+      }
+   }
+}
+
+@media screen and (max-width: 360px){
+   .book{
+      .book_info{
+         .buttons{
+            flex-direction: column-reverse;
+            align-items: center;
+         }
+      }
    }
 }

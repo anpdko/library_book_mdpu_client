@@ -30,3 +30,16 @@
       }
    }
 }
+
+@media screen and (max-width: 768px){
+   .pagination{
+      margin-block: 20px 10px;
+   }
+}
+
+
+@media screen and (max-width: 480px){
+   .pagination{
+      margin-block: 15px 10px;
+   }
+}
