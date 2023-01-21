@@ -7,10 +7,12 @@ import { EyeFill, CloudArrowDownFill, StopFill } from 'react-bootstrap-icons'
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from 'react-redux';
 import { getBook } from '../../store/books/booksSlice'
+import { useScrollTop } from '../../hooks'
 
 const imgUrl = process.env.REACT_APP_GOOGLE_DRIVE_IMG_URL 
 
 const BookPage = () => {
+   useScrollTop()
    const [book, setBook] = useState([])
    const bookId = String(useParams().id)
    const { books } = useSelector(state => state.books)

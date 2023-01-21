@@ -7,11 +7,13 @@ const RouterApp = () => {
    
    if(isLogin){
       return (
-         <Routes>
-            <Route exact path='/' element={<Home/>}/>
-            <Route path='/book/:id' element={<BookPage/>}/>
-            <Route path="*" element={<Navigate to={'/'}/>} />
-         </Routes>
+         <React.Fragment>
+            <Routes>
+               <Route exact path='/' element={<Home/>}/>
+               <Route path='/book/:id' element={<BookPage/>}/>
+               <Route path="*" element={<Navigate to={'/'}/>} />
+            </Routes>
+         </React.Fragment>
       );
    }
 };
