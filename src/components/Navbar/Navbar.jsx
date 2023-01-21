@@ -7,7 +7,6 @@ import { Search } from 'react-bootstrap-icons'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMousePosition } from '../../hooks'
-import { useEffect } from 'react'
 
 const Navbar = ({title}) => {
    const position = useMousePosition();
