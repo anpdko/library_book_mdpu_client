@@ -19,7 +19,7 @@ const ImgBook = ({ src, className, ...props }) => {
             src={src} 
             alt="book" 
             className = {`${styles.img} ${loadImg?styles.active:styles.anim}`}
-            onLoad = {()=> setLoadImg(true)}
+            onLoad = {()=> setTimeout(()=>setLoadImg(true), 2000)}
             onError={(err)=>{err.target.src = bookUrl}}
          />
          <div className={styles.box_effect}></div>
