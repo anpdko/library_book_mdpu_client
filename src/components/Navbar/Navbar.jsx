@@ -7,10 +7,12 @@ import { Search } from 'react-bootstrap-icons'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMousePosition } from '../../hooks'
+import { useEffect } from 'react'
 
 const Navbar = ({title}) => {
    const position = useMousePosition();
    const [toggle, setToggle] = useState(false)
+   const isMobile = window.innerWidth < 768;
 
    const backAnimate = () => {
       return { 
@@ -22,7 +24,7 @@ const Navbar = ({title}) => {
    const frontAnimate = () => {
       return { 
          scale: 1, 
-         x: position.x/window.innerWidth*(-20), 
+         x: position.x / window.innerWidth*(-20), 
          y: position.y / window.innerHeight*(-10)
       }
    }
@@ -61,7 +63,28 @@ const Navbar = ({title}) => {
                   </div>
                </nav>
             </div>
-            <div className={styles.box_img}>
+            {isMobile
+            ?<div className={styles.box_img}>
+               <img 
+                  className={`${styles.img} ${styles.cover}`} 
+                  src={coverImg} alt="cover"
+               />
+               <div className={styles.box}>
+                  <motion.h1 
+                        className={styles.title}
+                        initial={{ scale: 1.2 }}
+                        animate={{scale: 1}}
+                        exit={{ scale: 1 }}
+                        transition={{ duration: 0.6, ease: "backOut" }}
+                     >
+                        {!!title
+                           ?title
+                           :"Бібліотека Мелітопольського державного педагогічного університета імені Богдана Хмельницького"
+                        }
+                     </motion.h1>
+               </div>
+            </div>
+            :<div className={styles.box_img}>
                <motion.img 
                   className={`${styles.img} ${styles.cover}`} 
                   src={coverImg} alt="cover"
@@ -87,20 +110,21 @@ const Navbar = ({title}) => {
                   transition={{ duration: 0.5, ease: "easeOut" }}
                />
                <div className={styles.box}>
-               <motion.h1 
-                  className={styles.title}
-                  initial={{ scale: 1.2 }}
-                  animate={frontAnimate()}
-                  exit={{ scale: 1.2 }}
-                  transition={{ duration: 0.6, ease: "backOut" }}
-               >
-                  {!!title
-                     ?title
-                     :"Бібліотека Мелітопольського державного педагогічного університета імені Богдана Хмельницького"
-                  }
-               </motion.h1>
+                  <motion.h1 
+                     className={styles.title}
+                     initial={{ scale: 1.2 }}
+                     animate={frontAnimate()}
+                     exit={{ scale: 1.2 }}
+                     transition={{ duration: 0.6, ease: "backOut" }}
+                  >
+                     {!!title
+                        ?title
+                        :"Бібліотека Мелітопольського державного педагогічного університета імені Богдана Хмельницького"
+                     }
+                  </motion.h1>
                </div>
             </div>
+            }
          </header>
       </AnimatePresence>
    );
